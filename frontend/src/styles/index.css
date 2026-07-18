@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-ink-900/10;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-surface-muted text-ink-900;
+  }
+  ::selection {
+    @apply bg-teal-500/20;
+  }
+  textarea:focus,
+  input:focus,
+  button:focus-visible {
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(11, 14, 17, 0.15);
+    border-radius: 999px;
+  }
+}
