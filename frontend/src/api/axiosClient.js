@@ -14,7 +14,7 @@ import { STORAGE_KEYS } from "@/utils/constants";
  */
 const n8nClient = axios.create({
   baseURL: env.n8n.baseUrl,
-  timeout: 20000,
+  timeout: 120000,
   headers: {
     "Content-Type": "application/json",
     // Required when n8n is exposed via an ngrok free-tier tunnel: without

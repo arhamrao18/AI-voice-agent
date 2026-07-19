@@ -16,8 +16,18 @@ export function ChatProvider({ children }) {
   const [sessions, setSessions] = useState(() => storage.get(STORAGE_KEYS.CHAT_SESSIONS, []));
   const [activeSessionId, setActiveSessionId] = useState(() => sessions[0]?.id ?? null);
 
+  // Persist sessions to localStorage, but strip the (potentially large)
+  // base64 `audio` field from each message first. Audio is only needed for
+  // immediate playback right after a reply arrives — keeping it around in
+  // localStorage has no purpose and was blowing past the ~5-10MB browser
+  // storage quota after just a few voice replies, silently breaking ALL
+  // persistence (not just audio) once the quota was hit.
   useEffect(() => {
-    storage.set(STORAGE_KEYS.CHAT_SESSIONS, sessions);
+    const sessionsForStorage = sessions.map((session) => ({
+      ...session,
+      messages: session.messages.map(({ audio, ...rest }) => rest),
+    }));
+    storage.set(STORAGE_KEYS.CHAT_SESSIONS, sessionsForStorage);
   }, [sessions]);
 
   const createSession = useCallback((firstMessageText = "New conversation") => {
