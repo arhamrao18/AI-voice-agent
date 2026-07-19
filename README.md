@@ -4,6 +4,12 @@ A voice-and-text AI assistant built with a **React frontend** and an **n8n workf
 
 ---
 
+## 🎥 Demo
+
+https://github.com/user-attachments/assets/bd45eee8-52e9-4973-91c0-333605950a62
+
+---
+
 ## ✨ Features
 
 - **Text + Voice chat** — talk to the assistant by typing or using the microphone (browser speech recognition)
